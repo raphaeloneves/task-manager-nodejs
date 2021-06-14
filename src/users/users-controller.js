@@ -1,18 +1,19 @@
 
 const express = require('express')
 const router = new express.Router()
-const auth = require('../auth/authHandler')
-const User = require('./usersModel')
-const UserRequest = require('./userRequest')
+const auth = require('../auth/auth-middleware')
+const User = require('./users-model')
+const UserRequestDto = require('./dtos/user-request-dto')
+const userService = require('./users-service')
 
-router.post("/users", async (req, res) => {
-    const user = Object.assign(new UserRequest(), req.body)
-    console.log('user', user)
+router.post("/users", async (req, res, next) => {
+    const userDto = Object.assign(new UserRequestDto(), req.body)
     try {
-        //await user.save()
-        res.status(201).send();
+        const createdUser = await userService.save(userDto)
+        //res.status(201).send(createdUser);
+        throw new Error()
     } catch(e) {
-        res.status(400).send(e);
+        next(e)
     }
 })
 
@@ -20,25 +21,22 @@ router.get("/users/me", auth, async (req, res) => {
     res.send(req.user)
 })
 
-router.get("/users/:id", auth, async (req, res) => {
+router.get("/users/:id", auth, async (req, res, next) => {
     const id = req.params.id;
     try {
-        const user = await User.findById(id);
-        if(!user) {
-            return res.status(404).send( {error: "User not found"} );
-        }
-        return res.status(200).send(req.user.toJSON())
+        const user = await userService.findById(id)
+        return res.status(200).send(user)
     }catch(e) {
-        res.status(500).send(e)
+        next(e)
     }
 })
 
-router.delete('/users/me', auth, async (req, res) => {
+router.delete('/users/me', auth, async (req, res, next) => {
     try{
         await req.user.remove()
         res.status(204).send()
     }catch (e) {
-        res.status(500).send({error: e.message})
+        next(e)
     }
 })
 

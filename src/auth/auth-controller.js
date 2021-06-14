@@ -1,6 +1,6 @@
 const express = require('express')
 const router = new express.Router()
-const auth = require('./authHandler')
+const auth = require('./auth-middleware')
 const User = require('../users/users-model')
 
 router.post("/auth/login", async (req, res) => {

@@ -5,7 +5,7 @@ const MY_KEY = 'node_playground_key'
 const AUTH_HEADER_NAME = 'authorization'
 const AUTH_TOKEN_PREFIX = 'Bearer '
 
-const authHandler = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
     try {
         const authHeader = req.headers[AUTH_HEADER_NAME];
         if(!authHeader) {
@@ -28,4 +28,4 @@ const authHandler = async (req, res, next) => {
     }
 }
 
-module.exports = authHandler
+module.exports = authMiddleware

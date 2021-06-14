@@ -1,9 +1,9 @@
 const BaseError = require('./base-error')
 
-class ResourceNotFoundError extends BaseError {
+class ValidationError extends BaseError {
     constructor(error, statusCode, message) {
-        super(error, 404, "Resource not found.");
+        super(error, 422, message);
     }
 }
 
-module.exports = ResourceNotFoundError
+module.exports = ValidationError

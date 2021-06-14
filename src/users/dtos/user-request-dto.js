@@ -7,4 +7,4 @@ class UserRequestDto {
     }
 }
 
-module.exports = UsesrRequestDto
+module.exports = UserRequestDto

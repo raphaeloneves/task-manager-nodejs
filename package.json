@@ -1,0 +1,36 @@
+{
+  "name": "task-manager-nodejs",
+  "version": "1.0.0",
+  "description": "Task Manager App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaeloneves/task-manager-nodejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Raphael Neves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raphaeloneves/task-manager-nodejs/issues"
+  },
+  "homepage": "https://github.com/raphaeloneves/task-manager-nodejs#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.9",
+    "mongoose": "^5.12.12",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
